@@ -16,9 +16,6 @@
 
 BLOCK-LEVEL ON ERROR UNDO, THROW.
 
-USING abl-logger.ABLLogger FROM PROPATH.
-USING OpenEdge.Core.LogLevelEnum FROM PROPATH.
-
 DEFINE VARIABLE cMessage AS CHARACTER NO-UNDO.
 
 
@@ -30,16 +27,16 @@ DEFINE VARIABLE cMessage AS CHARACTER NO-UNDO.
 
 
 
-/* **********************  Internal Procedures  *********************** */
+/* **********************  Internal Procedures  ** ********************* */
 
 PROCEDURE loggerDemo:
 /*------------------------------------------------------------------------------
  Purpose:
  Notes:
 ------------------------------------------------------------------------------*/
-        DEFINE VARIABLE loglevel AS LogLevelEnum.
+        DEFINE VARIABLE loglevel AS LogLevelType.
 
-        loglevel = LogLevelEnum:ERROR.
+        loglevel = LogLevelType:ERROR.
          
         DO:
             UNDO , THROW NEW Progress.Lang.AppError ("DO Block AppError", 1).          
