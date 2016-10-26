@@ -1,3 +1,0 @@
-[ERROR]: Exception Occurred:  Progress.Lang.AppError_1004
-DO Block AppError
-
