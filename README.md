@@ -1,37 +1,32 @@
 ABL Logger
 =====
 
-You can log ABL messages and exceptions
+You can log ABL exceptions, warnings and messages to the log file and trouble shoot the issues.
 
 Usage
 -----
-
-``` js
-var clear = require('clear');
-clear();
 ```
+The module can be used in various ways:
 
-Example
--------
+1. Log only the exception:
+ABLLogger:getInstance():log("Exception occured: "  + exception).
 
-![Node Clear](http://daveeddy.com/static/media/github/node-clear.gif)
+2. Log exception and messages
+ABLLogger:getInstance():log("Exception occured: "  + exception, "Unable to locate the file").
 
-### clear([bool])
-
-You can optionally give clear an argument of `false` to prevent it from clearing the screen.
-This will not remove anything from the screen, but instead move your cursor to
-position 0,0.  Much like printing a `\r` instead of a `\n` to reset the current
-line of output.
+3. Log exception, message and the log level.
+ABLLogger:getInstance():log("Exception occured: "  + exception, "Unable to locate the file", LOG_LEVEL_WARNING).
+```
 
 Installation
 ------------
-
-    npm install abl-logger
+    apm install abl-logger
 
 ANSI Codes
 ----------
 
 http://www.inwap.com/pdp10/ansicode.txt
+
 
 License
 -------
