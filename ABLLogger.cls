@@ -13,6 +13,7 @@
 BLOCK-LEVEL ON ERROR UNDO, THROW.
 
 USING abl-logger.ABLLogger FROM PROPATH.
+USING OpenEdge.Core.LogLevelEnum FROM PROPATH.
 
 CLASS abl-logger.ABLLogger:
     
@@ -54,18 +55,22 @@ CLASS abl-logger.ABLLogger:
     
     METHOD PUBLIC VOID log(INPUT excptn AS CHARACTER, INPUT msg AS CHARACTER):
  
-        log(excptn, msg, 1).        
+        log(excptn, msg, 2).        
         
     END METHOD.
         
     
-     METHOD PUBLIC VOID log(INPUT excptn AS CHARACTER, INPUT msg AS CHARACTER, INPUT logLevel AS INTEGER):
+     METHOD PUBLIC VOID log(INPUT excptn AS CHARACTER, INPUT msg AS CHARACTER, INPUT logLevel AS INT64):
        
        define variable logType as CHARACTER INITIAL "ERROR".
-       if logLevel = 1 then 
+       
+       
+       if logLevel = LogLevelEnum:WARN:GetValue() then 
             do:
                 logType = "WARNING".
         END.
+	//Similarly can be handled for other log levels.
+        
                 
         OUTPUT TO value("logger.txt") APPEND.
         PUT UNFORMATTED 
