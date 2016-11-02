@@ -1,13 +1,13 @@
 
 /*------------------------------------------------------------------------
-    File        : custom.p
-    Purpose     : 
+    File        : InvokeABLLogger.p
+    Purpose     : Sample program that handles the exceptions and logs them by invoking various APIs with ABLLogger class.  
 
     Syntax      :
 
     Description : 
 
-    Author(s)   : 
+    Author(s)   : knangunu
     Created     : Wed Oct 26 12:21:45 IST 2016
     Notes       :
   ----------------------------------------------------------------------*/
@@ -15,6 +15,9 @@
 /* ***************************  Definitions  ************************** */
 
 BLOCK-LEVEL ON ERROR UNDO, THROW.
+
+USING abl-logger.ABLLogger FROM PROPATH.
+USING abl-logger.LogLevelType FROM PROPATH.
 
 DEFINE VARIABLE cMessage AS CHARACTER NO-UNDO.
 
@@ -27,7 +30,7 @@ DEFINE VARIABLE cMessage AS CHARACTER NO-UNDO.
 
 
 
-/* **********************  Internal Procedures  ** ********************* */
+/* **********************  Internal Procedures  *********************** */
 
 PROCEDURE loggerDemo:
 /*------------------------------------------------------------------------------
