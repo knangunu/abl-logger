@@ -1,7 +1,7 @@
  
 /*------------------------------------------------------------------------
    File        : ABLLogger
-   Purpose     : 
+   Purpose     : Logger class which logs the ABL errors, exceptions and info messages to a log file. 
    Syntax      : 
    Description : 
    Author(s)   : knangunu
@@ -12,8 +12,9 @@
 
 BLOCK-LEVEL ON ERROR UNDO, THROW.
 
-USING abl-logger.ABLLogger FROM PROPATH.
 USING OpenEdge.Core.LogLevelEnum FROM PROPATH.
+USING abl-logger.ABLLogger FROM PROPATH.
+USING abl-logger.LogLevelType FROM PROPATH.
 
 CLASS abl-logger.ABLLogger:
     
@@ -55,21 +56,32 @@ CLASS abl-logger.ABLLogger:
     
     METHOD PUBLIC VOID log(INPUT excptn AS CHARACTER, INPUT msg AS CHARACTER):
  
-        log(excptn, msg, 2).        
+        log(excptn, msg, LogLevelType:ERROR:GetValue()).        
         
     END METHOD.
         
     
-     METHOD PUBLIC VOID log(INPUT excptn AS CHARACTER, INPUT msg AS CHARACTER, INPUT logLevel AS INT64):
+     METHOD PUBLIC VOID log(INPUT excptn AS CHARACTER, INPUT msg AS CHARACTER, INPUT loglevel AS INT64):
        
-       define variable logType as CHARACTER INITIAL "ERROR".
+       define variable logType as CHARACTER NO-UNDO.
        
        
-       if logLevel = LogLevelEnum:WARN:GetValue() then 
+       if logLevel = LogLevelType:WARNING:GetValue() then 
             do:
                 logType = "WARNING".
         END.
-	//Similarly can be handled for other log levels.
+        else if logLevel = LogLevelType:DEBUG:GetValue() then 
+            do:
+                logType = "DEBUG".         
+        END.
+        else if logLevel = LogLevelType:ERROR:GetValue() then 
+            do:
+                logType = "ERROR".         
+        END.
+        else if logLevel = LogLevelType:INFO:GetValue() then 
+            do:
+                logType = "INFO".         
+        END.
         
                 
         OUTPUT TO value("logger.txt") APPEND.
