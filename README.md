@@ -15,7 +15,7 @@ ABLLogger:getInstance():log("Exception occured: "  + exception).
 ABLLogger:getInstance():log("Exception occured: "  + exception, "Unable to locate the file").
 
 3. Log exception, message and the log level.
-ABLLogger:getInstance():log("Exception occured: "  + exception, "Unable to locate the file", LOG_LEVEL_WARNING).
+ABLLogger:getInstance():log("Exception occured: "  + exception, "Unable to locate the file", WARNING).
 ```
 
 Installation
